@@ -48,6 +48,18 @@ public class ScheduleActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "Activity launched, mode = create", Toast.LENGTH_SHORT).show();
         }
+        setupActionBar();
+    }
+
+    public void setupActionBar(){
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return super.onSupportNavigateUp();
     }
 
 

@@ -28,5 +28,21 @@ public class ScheduleDetailActivity extends AppCompatActivity { // 時計画面�
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_schedule_detail);
+        setupUi();
+    }
+
+    public void setupUi(){
+        setupActionBar();
+    }
+
+    public void setupActionBar(){
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return super.onSupportNavigateUp();
     }
 }
