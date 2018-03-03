@@ -1,5 +1,6 @@
 package com.m1zyuk1.astilbe;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
@@ -11,10 +12,10 @@ public class ScheduleDetailActivity extends AppCompatActivity {
 
     public ActivityScheduleDetailBinding binding;
 
-    public final String SCHEDULE = "schedule";
+    public static final String SCHEDULE = "schedule";
 
-    public Intent makeIntent(String schedule) {
-        Intent intent = new Intent(this, ScheduleActivity.class);
+    public static Intent makeIntent(Context context, String schedule) {
+        Intent intent = new Intent(context, ScheduleActivity.class);
         if(!schedule.isEmpty()){
             // putExtras(schedule:bundle)
             intent.putExtra(SCHEDULE,schedule);

@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupFloatingActionButton() {
         binding.addScheduleButton.setOnClickListener((view) -> {
             Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
+            startActivity(ScheduleActivity.makeIntent(this));
         });
     }
 

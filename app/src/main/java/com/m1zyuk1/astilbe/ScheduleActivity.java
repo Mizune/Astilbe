@@ -1,9 +1,11 @@
 package com.m1zyuk1.astilbe;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.m1zyuk1.astilbe.databinding.ActivityScheduleBinding;
 
@@ -11,17 +13,17 @@ public class ScheduleActivity extends AppCompatActivity {
 
     private ActivityScheduleBinding binding;
 
-    public final String SCHEDULE = "schedule";
+    public static final String SCHEDULE = "schedule";
 
-    public Intent makeIntent() {
-        return makeIntent("");
+    public static Intent makeIntent(Context context) {
+        return makeIntent(context, "");
     }
 
-    public Intent makeIntent(String schedule) {
-        Intent intent = new Intent(this, ScheduleActivity.class);
-        if(!schedule.isEmpty()){
+    public static Intent makeIntent(Context context, String schedule) {
+        Intent intent = new Intent(context, ScheduleActivity.class);
+        if (!schedule.isEmpty()) {
             // putExtras(schedule:bundle)
-            intent.putExtra(SCHEDULE,schedule);
+            intent.putExtra(SCHEDULE, schedule);
         }
         return intent;
     }
@@ -29,13 +31,20 @@ public class ScheduleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_schedule);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_schedule);
+
     }
 
     public void setUpUi() {
         // TODO switching mode
         // if schedules == empty or not
         // binding. hogehoge
+        Intent intent = getIntent();
+        if (intent.getStringExtra(SCHEDULE).isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Activity launched, mode = create", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Activity launched, mode = edit", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
