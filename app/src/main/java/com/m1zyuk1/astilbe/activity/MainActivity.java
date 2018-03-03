@@ -1,12 +1,11 @@
-package com.m1zyuk1.astilbe;
+package com.m1zyuk1.astilbe.activity;
 
 import android.databinding.DataBindingUtil;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
+import com.m1zyuk1.astilbe.R;
 import com.m1zyuk1.astilbe.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.m1zyuk1.astilbe;
+package com.m1zyuk1.astilbe.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.m1zyuk1.astilbe.R;
 import com.m1zyuk1.astilbe.databinding.ActivityScheduleDetailBinding;
 
 public class ScheduleDetailActivity extends AppCompatActivity {
@@ -26,6 +27,6 @@ public class ScheduleDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_schedule_detail);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_schedule_detail);
     }
 }

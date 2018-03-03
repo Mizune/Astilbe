@@ -1,4 +1,4 @@
-package com.m1zyuk1.astilbe;
+package com.m1zyuk1.astilbe.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.m1zyuk1.astilbe.R;
 import com.m1zyuk1.astilbe.databinding.ActivityScheduleBinding;
 
 public class ScheduleActivity extends AppCompatActivity {
