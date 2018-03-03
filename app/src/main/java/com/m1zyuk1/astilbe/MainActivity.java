@@ -28,18 +28,18 @@ public class MainActivity extends AppCompatActivity {
     // TODO とりあえずStringデータが表示できるようにする
     //
 
-    private void initializeSchedules(){
+    private void initializeSchedules() {
         // pref見て binding
     }
 
-    private void setupUi(){
+    private void setupUi() {
         // binding追加してonClickとか titleとか dialog初回だしとか
         setupFloatingActionButton();
     }
 
-    private void setupFloatingActionButton(){
+    private void setupFloatingActionButton() {
         binding.addScheduleButton.setOnClickListener((view) -> {
-            Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
         });
     }
 

@@ -1,13 +1,42 @@
 package com.m1zyuk1.astilbe;
 
+import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.m1zyuk1.astilbe.databinding.ActivityScheduleBinding;
+
 public class ScheduleActivity extends AppCompatActivity {
+
+    private ActivityScheduleBinding binding;
+
+    public final String SCHEDULE = "schedule";
+
+    public Intent makeIntent() {
+        return makeIntent("");
+    }
+
+    public Intent makeIntent(String schedule) {
+        Intent intent = new Intent(this, ScheduleActivity.class);
+        if(!schedule.isEmpty()){
+            // putExtras(schedule:bundle)
+            intent.putExtra(SCHEDULE,schedule);
+        }
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_schedule);
     }
+
+    public void setUpUi() {
+        // TODO switching mode
+        // if schedules == empty or not
+        // binding. hogehoge
+    }
+
+
 }
