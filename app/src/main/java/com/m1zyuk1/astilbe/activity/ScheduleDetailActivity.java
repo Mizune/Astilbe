@@ -9,14 +9,14 @@ import android.os.Bundle;
 import com.m1zyuk1.astilbe.R;
 import com.m1zyuk1.astilbe.databinding.ActivityScheduleDetailBinding;
 
-public class ScheduleDetailActivity extends AppCompatActivity {
+public class ScheduleDetailActivity extends AppCompatActivity { // 時計画面と工程のやつ 上部がClockFragment, 下部RecyclerView
 
     public ActivityScheduleDetailBinding binding;
 
     public static final String SCHEDULE = "schedule";
 
     public static Intent makeIntent(Context context, String schedule) {
-        Intent intent = new Intent(context, ScheduleActivity.class);
+        Intent intent = new Intent(context, ScheduleDetailActivity.class);
         if(!schedule.isEmpty()){
             // putExtras(schedule:bundle)
             intent.putExtra(SCHEDULE,schedule);
