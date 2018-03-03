@@ -32,10 +32,10 @@ public class ScheduleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_schedule);
-
+        setupUi();
     }
 
-    public void setUpUi() {
+    public void setupUi() {
         // TODO switching mode
         // if schedules == empty or not
         // binding. hogehoge
