@@ -1,18 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.m1zyuk1.astilbe">
+
     <data>
         <!--empty-->
     </data>
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Schedules Activity"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/labelBackground"
+                android:paddingBottom="8dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp"
+                android:text="表示設定"
+
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/schedule_title_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="8dp"
+                android:hint="@string/schedule_title_hint"
+                android:textSize="16sp" />
+
+            <include layout="@layout/component_divider" />
+
+            <!--TODO impl color picker-->
+            <TextView
+                android:id="@+id/schedule_color_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp"
+                android:text="カラー"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/labelBackground"
+                android:paddingBottom="8dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp"
+                android:text="時間設定" />
+
+            <include
+                android:id="@+id/schedule_departure_time_form"
+                layout="@layout/schedule_form_item" />
+
+            <include layout="@layout/component_divider" />
+
+            <include
+                android:id="@+id/schedule_to_station_time_form"
+                layout="@layout/schedule_form_item" />
+
+            <include layout="@layout/component_divider" />
+
+            <include
+                android:id="@+id/schedule_departure_station_name_form"
+                layout="@layout/schedule_form_item" />
+
+            <include layout="@layout/component_divider" />
+
+            <include
+                android:id="@+id/schedule_arrival_station_name_form"
+                layout="@layout/schedule_form_item" />
+
+            <include layout="@layout/component_divider" />
+
+            <include
+                android:id="@+id/schedule_from_arrival_station_time_form"
+                layout="@layout/schedule_form_item" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/labelBackground"
+                android:paddingBottom="8dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp"
+                android:text="曜日設定"
+                android:textSize="20sp" />
+
+            <!--TODO impl date picker-->
+            <TextView
+                android:id="@+id/schedule_date_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp"
+                android:text="曜日"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/labelBackground"
+                android:paddingBottom="8dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp"
+                android:text="通知設定" />
+
+            <include
+                android:id="@+id/schedule_push_notification_toggle_form"
+                layout="@layout/schedule_toggle_form_item" />
+
+            <include layout="@layout/component_divider" />
+
+            <include
+                android:id="@+id/schedule_notification_sound_form"
+                layout="@layout/schedule_form_item" />
+
+            <include layout="@layout/component_divider" />
+
+            <include
+                android:id="@+id/schedule_vibration_toggle_form"
+                layout="@layout/schedule_toggle_form_item" />
+
+        </LinearLayout>
+    </ScrollView>
 </layout>

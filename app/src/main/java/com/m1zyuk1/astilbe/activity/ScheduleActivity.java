@@ -52,6 +52,7 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     public void setupActionBar(){
+        setTitle(R.string.schedule_edit);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
