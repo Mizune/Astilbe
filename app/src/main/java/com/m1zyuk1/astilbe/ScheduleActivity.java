@@ -3,6 +3,7 @@ package com.m1zyuk1.astilbe;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -19,7 +20,7 @@ public class ScheduleActivity extends AppCompatActivity {
         return makeIntent(context, "");
     }
 
-    public static Intent makeIntent(Context context, String schedule) {
+    public static Intent makeIntent(Context context,@Nullable String schedule) {
         Intent intent = new Intent(context, ScheduleActivity.class);
         if (!schedule.isEmpty()) {
             // putExtras(schedule:bundle)
@@ -40,10 +41,11 @@ public class ScheduleActivity extends AppCompatActivity {
         // if schedules == empty or not
         // binding. hogehoge
         Intent intent = getIntent();
-        if (intent.getStringExtra(SCHEDULE).isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Activity launched, mode = create", Toast.LENGTH_SHORT).show();
-        } else {
+        String schedule = intent.getStringExtra(SCHEDULE);
+        if (schedule != null) {
             Toast.makeText(getApplicationContext(), "Activity launched, mode = edit", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Activity launched, mode = create", Toast.LENGTH_SHORT).show();
         }
     }
 
