@@ -1,6 +1,22 @@
 <resources>
     <string name="app_name">Astilbe</string>
 
+    <!-- Main -->
     <string name="schedule_edit">設定</string>
     <string name="schedule_title_hint">タイトル</string>
+
+
+    <!-- Schedule Activity -->
+    <string name="schedule_departure_time">出発時刻</string>
+    <string name="schedule_to_departure_time">出発駅までの所要時間</string>
+    <string name="schedule_departure_station_name">出発駅</string>
+    <string name="schedule_arrival_station_name">到着駅</string>
+    <string name="schedule_from_arrival_time">到着駅からの所要時間</string>
+    <string name="schedule_push_notification">プッシュ通知</string>
+    <string name="schedule_notification_sound">通知音</string>
+    <string name="schdule_vibration">バイブレーション</string>
+
+
+
+
 </resources>
