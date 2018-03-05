@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.m1zyuk1.astilbe.R;
 import com.m1zyuk1.astilbe.databinding.ActivityScheduleDetailBinding;
+import com.m1zyuk1.astilbe.model.Schedule;
 
 public class ScheduleDetailActivity extends AppCompatActivity { // 時計画面と工程のやつ 上部がClockFragment, 下部RecyclerView
 
@@ -15,11 +16,13 @@ public class ScheduleDetailActivity extends AppCompatActivity { // 時計画面�
 
     public static final String SCHEDULE = "schedule";
 
-    public static Intent makeIntent(Context context, String schedule) {
+    private Schedule schedule;
+
+    public static Intent makeIntent(Context context, Schedule schedule) {
         Intent intent = new Intent(context, ScheduleDetailActivity.class);
-        if(!schedule.isEmpty()){
+        if (!schedule.getTitle().isEmpty()) {
             // putExtras(schedule:bundle)
-            intent.putExtra(SCHEDULE,schedule);
+            intent.putExtra(SCHEDULE, schedule);
         }
         return intent;
     }
@@ -28,20 +31,23 @@ public class ScheduleDetailActivity extends AppCompatActivity { // 時計画面�
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_schedule_detail);
+        Intent data = getIntent();
+        schedule = (Schedule) data.getSerializableExtra(SCHEDULE);
         setupUi();
     }
 
-    public void setupUi(){
+    public void setupUi() {
         setupActionBar();
+        binding.scheduleDetailTitle.setText(schedule.getTitle());
     }
 
-    public void setupActionBar(){
+    public void setupActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return super.onSupportNavigateUp();
     }

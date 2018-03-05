@@ -28,7 +28,7 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleLi
 
         inflate.setOnClickListener(v -> {
             final int position = viewHolder.getAdapterPosition();
-            parent.getContext().startActivity(ScheduleDetailActivity.makeIntent(parent.getContext(), scheduleList.get(position).getTitle()));
+            parent.getContext().startActivity(ScheduleDetailActivity.makeIntent(parent.getContext(), scheduleList.get(position)));
         });
         return viewHolder;
     }
