@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.m1zyuk1.astilbe.R;
 import com.m1zyuk1.astilbe.databinding.ActivityScheduleBinding;
+import com.m1zyuk1.astilbe.model.Schedule;
 
 public class ScheduleActivity extends AppCompatActivity {
 
@@ -19,11 +20,15 @@ public class ScheduleActivity extends AppCompatActivity {
 
     public static final String SCHEDULE = "schedule";
 
+    public static final String CREATED_SCHEDULE = "created_schedule";
+
+    public static final int SUCCESS_CREATE_SCHEDULE = 11;
+
     public static Intent makeIntent(Context context) {
         return makeIntent(context, "");
     }
 
-    public static Intent makeIntent(Context context,@Nullable String schedule) {
+    public static Intent makeIntent(Context context, @Nullable String schedule) {
         Intent intent = new Intent(context, ScheduleActivity.class);
         if (!schedule.isEmpty()) {
             // putExtras(schedule:bundle)
@@ -57,13 +62,13 @@ public class ScheduleActivity extends AppCompatActivity {
         setupText();
     }
 
-    private void setupActionBar(){
+    private void setupActionBar() {
         setTitle(R.string.schedule_edit);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
-    private void setupOnClickListener(){
+    private void setupOnClickListener() {
         binding.scheduleDepartureTimeForm.itemView.setOnClickListener(v -> {
             Toast.makeText(getApplicationContext(), "Select departure time form", Toast.LENGTH_SHORT).show();
         });
@@ -77,7 +82,7 @@ public class ScheduleActivity extends AppCompatActivity {
         });
 
         binding.scheduleArrivalStationNameForm.itemView.setOnClickListener(v -> {
-            Toast.makeText(getApplicationContext(), "Select arrival station name form",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Select arrival station name form", Toast.LENGTH_SHORT).show();
         });
 
         binding.scheduleFromArrivalStationTimeForm.itemView.setOnClickListener(v -> {
@@ -97,7 +102,7 @@ public class ScheduleActivity extends AppCompatActivity {
         });
     }
 
-    private void setupText(){
+    private void setupText() {
         binding.scheduleDepartureTimeForm.formTitle.setText(R.string.schedule_departure_time);
         binding.scheduleToDepartureTimeForm.formTitle.setText(R.string.schedule_to_departure_time);
         binding.scheduleDepartureStationNameForm.formTitle.setText(R.string.schedule_departure_station_name);
@@ -111,7 +116,7 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return super.onSupportNavigateUp();
     }
@@ -136,12 +141,22 @@ public class ScheduleActivity extends AppCompatActivity {
         }
     }
 
-    public void createSchedule(){
+    public void createSchedule() {
         // modeに合わせてscheduleがなければ作る
         // あれば更新する
         // MainActivityに伝搬させる
         // finishで戻れるようにstartActicityを調整する
-        Toast.makeText(getApplicationContext(), "Created schedule.", Toast.LENGTH_SHORT).show();
+        if (validate()) {
+            Schedule schedule = new Schedule(binding.scheduleTitleForm.getText().toString());
+            Intent intent = new Intent();
+            intent.putExtra(CREATED_SCHEDULE, schedule);
+            setResult(SUCCESS_CREATE_SCHEDULE, intent);
+            Toast.makeText(getApplicationContext(), "Created schedule.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public boolean validate() {
+        return true;
     }
 
 }
