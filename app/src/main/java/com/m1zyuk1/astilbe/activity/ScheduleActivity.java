@@ -129,6 +129,7 @@ public class ScheduleActivity extends AppCompatActivity {
             case R.id.add_button:
                 // save & startActivity
                 createSchedule();
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -140,6 +141,7 @@ public class ScheduleActivity extends AppCompatActivity {
         // あれば更新する
         // MainActivityに伝搬させる
         // finishで戻れるようにstartActicityを調整する
+        Toast.makeText(getApplicationContext(), "Created schedule.", Toast.LENGTH_SHORT).show();
     }
 
 }
