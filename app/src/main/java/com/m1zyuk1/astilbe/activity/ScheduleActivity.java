@@ -41,6 +41,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
     private void setupUi() {
         // TODO switching mode
+        // TODO create form validation
         // if schedules == empty or not
         // binding. hogehoge
         Intent intent = getIntent();
