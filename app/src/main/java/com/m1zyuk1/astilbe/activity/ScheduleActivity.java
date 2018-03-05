@@ -6,6 +6,8 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.m1zyuk1.astilbe.R;
@@ -113,5 +115,30 @@ public class ScheduleActivity extends AppCompatActivity {
         return super.onSupportNavigateUp();
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_schedule, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_button:
+                // save & startActivity
+                createSchedule();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void createSchedule(){
+        // modeに合わせてscheduleがなければ作る
+        // あれば更新する
+        // MainActivityに伝搬させる
+        // finishで戻れるようにstartActicityを調整する
+    }
 
 }
