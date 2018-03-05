@@ -1,7 +1,9 @@
 package com.m1zyuk1.astilbe.activity;
 
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import com.m1zyuk1.astilbe.R;
 import com.m1zyuk1.astilbe.ScheduleRecyclerViewAdapter;
 import com.m1zyuk1.astilbe.databinding.ActivityMainBinding;
 import com.m1zyuk1.astilbe.model.Schedule;
+import com.m1zyuk1.astilbe.model.SerializeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     ScheduleRecyclerViewAdapter adapter;
 
     public static final int REQUEST_CREATE_SCHEDULE = 10;
+    public static final String SCHEDULES_PREF = "schedules_pref";
+    public static final String SCHEDULES_STRING = "schedules_string";
 
 
     @Override
@@ -35,17 +40,18 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         initializeSchedules();
         setupUi();
-
     }
 
-    // TODO recyclerViewを持たせる
-    // TODO とりあえずStringデータが表示できるようにする
-    //
+
 
     private void initializeSchedules() {
+        SharedPreferences data = getSharedPreferences(SCHEDULES_PREF, Context.MODE_PRIVATE);
+        String schedulesRaw = data.getString(SCHEDULES_STRING,"");
         // pref見て binding
-        if (schedules == null) {
+        if (schedulesRaw.isEmpty()) {
             schedules = new ArrayList();
+        } else {
+            schedules = SerializeUtil.toSchedules(schedulesRaw);
         }
     }
 
@@ -60,7 +66,9 @@ public class MainActivity extends AppCompatActivity {
                     Schedule schedule = (Schedule) data.getSerializableExtra(ScheduleActivity.CREATED_SCHEDULE);
                     updateToRecyclerView(schedule);
                     insertToRecyclerView(schedule);//あれば更新 なければ追加
+                    saveSchedules();
                     // この方法だと多分更新が上手くいかん(元々の状態と更新後の状態持って来て　前の状態で検索かければいけるか)
+                    // sharedPrefへの書き込みも
                 }
                 break;
             default:
@@ -126,6 +134,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    public void saveSchedules(){
+        SharedPreferences data = getSharedPreferences(SCHEDULES_PREF, Context.MODE_PRIVATE);
+        String convertedSchedules = SerializeUtil.toBase64(schedules);
+        SharedPreferences.Editor editor = data.edit();
+        editor.putString(SCHEDULES_STRING, convertedSchedules);
+        editor.apply();
     }
 
 
