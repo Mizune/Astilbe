@@ -64,7 +64,7 @@ public class ScheduleDetailActivity extends AppCompatActivity { // 時計画面�
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_schedule, menu);
+        getMenuInflater().inflate(R.menu.menu_schedule_detail, menu);
         return true;
     }
 
