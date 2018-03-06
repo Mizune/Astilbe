@@ -10,6 +10,10 @@ import com.m1zyuk1.astilbe.R;
 import com.m1zyuk1.astilbe.databinding.ActivityScheduleDetailBinding;
 import com.m1zyuk1.astilbe.model.Schedule;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ScheduleDetailActivity extends AppCompatActivity { // 時計画面と工程のやつ 上部がClockFragment, 下部RecyclerView
 
     public ActivityScheduleDetailBinding binding;
@@ -26,6 +30,7 @@ public class ScheduleDetailActivity extends AppCompatActivity { // 時計画面�
         }
         return intent;
     }
+    // menu edit button(2 type), delete button
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,9 @@ public class ScheduleDetailActivity extends AppCompatActivity { // 時計画面�
     public void setupUi() {
         setupActionBar();
         binding.scheduleDetailTitle.setText(schedule.getTitle());
+        final DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        final Date date = new Date(System.currentTimeMillis());
+        binding.clockRoot.clockTime.setText(df.format(date));
     }
 
     public void setupActionBar() {

@@ -7,5 +7,6 @@
     <color name="labelBackground">#e0e0e0</color>
 
     <color name="divider">#49000000</color>
+    <color name="gray">#e0e0e0</color>
 
 </resources>
