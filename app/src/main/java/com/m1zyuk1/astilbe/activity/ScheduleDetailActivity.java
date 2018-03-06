@@ -25,7 +25,6 @@ public class ScheduleDetailActivity extends AppCompatActivity { // 時計画面�
     public static Intent makeIntent(Context context, Schedule schedule) {
         Intent intent = new Intent(context, ScheduleDetailActivity.class);
         if (!schedule.getTitle().isEmpty()) {
-            // putExtras(schedule:bundle)
             intent.putExtra(SCHEDULE, schedule);
         }
         return intent;
