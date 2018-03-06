@@ -24,6 +24,8 @@ public class ScheduleActivity extends AppCompatActivity {
 
     public static final int SUCCESS_CREATE_SCHEDULE = 11;
 
+    private Schedule currentSchedule;
+
     public static Intent makeIntent(Context context) {
         return makeIntent(context, "");
     }
@@ -50,9 +52,10 @@ public class ScheduleActivity extends AppCompatActivity {
         // if schedules == empty or not
         // binding. hogehoge
         Intent intent = getIntent();
-        String schedule = intent.getStringExtra(SCHEDULE);
+        Schedule schedule = (Schedule) intent.getSerializableExtra(SCHEDULE);
         if (schedule != null) {
             // データをセット
+            currentSchedule = schedule;
             Toast.makeText(getApplicationContext(), "Activity launched, mode = edit", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "Activity launched, mode = create", Toast.LENGTH_SHORT).show();
@@ -147,11 +150,17 @@ public class ScheduleActivity extends AppCompatActivity {
         // MainActivityに伝搬させる
         // finishで戻れるようにstartActicityを調整する
         if (validate()) {
-            Schedule schedule = new Schedule(binding.scheduleTitleForm.getText().toString());
             Intent intent = new Intent();
-            intent.putExtra(CREATED_SCHEDULE, schedule);
+            if (currentSchedule != null) {
+                currentSchedule.setTitle(binding.scheduleTitleForm.getText().toString());
+                intent.putExtra(CREATED_SCHEDULE, currentSchedule);
+            } else {
+                Schedule createdSchedule = new Schedule(binding.scheduleTitleForm.getText().toString());
+                intent.putExtra(CREATED_SCHEDULE, createdSchedule);
+            }
             setResult(SUCCESS_CREATE_SCHEDULE, intent);
             Toast.makeText(getApplicationContext(), "Created schedule.", Toast.LENGTH_SHORT).show();
+            // guidが変わってるか変わってないかでいける
         }
     }
 
