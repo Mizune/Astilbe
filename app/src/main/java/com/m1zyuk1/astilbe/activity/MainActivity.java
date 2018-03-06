@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private List schedules = new ArrayList<String>();
+    private List<Schedule> schedules = new ArrayList<>();
 
     ActivityMainBinding binding;
 
@@ -43,10 +43,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void initializeSchedules() {
         SharedPreferences data = getSharedPreferences(SCHEDULES_PREF, Context.MODE_PRIVATE);
-        String schedulesRaw = data.getString(SCHEDULES_STRING,"");
+        String schedulesRaw = data.getString(SCHEDULES_STRING, "");
         // pref見て binding
         if (schedulesRaw.isEmpty()) {
             schedules = new ArrayList();
@@ -64,16 +63,30 @@ public class MainActivity extends AppCompatActivity {
             case (REQUEST_CREATE_SCHEDULE):
                 if (resultCode == ScheduleActivity.SUCCESS_CREATE_SCHEDULE) {
                     Schedule schedule = (Schedule) data.getSerializableExtra(ScheduleActivity.CREATED_SCHEDULE);
-                    updateToRecyclerView(schedule);
-                    insertToRecyclerView(schedule);//あれば更新 なければ追加
+                    if (schedules.contains(schedule)) {
+
+                    }
+                    updateSchedules(schedule);//あれば更新 なければ追加
                     saveSchedules();
-                    // この方法だと多分更新が上手くいかん(元々の状態と更新後の状態持って来て　前の状態で検索かければいけるか)
-                    // sharedPrefへの書き込みも
                 }
                 break;
             default:
                 throw new UnsupportedOperationException("This request code does not support.");
         }
+    }
+
+    private void updateSchedules(Schedule createdSchedule) {
+        for (int i = 0; i < schedules.size(); i++) {
+            if (createdSchedule.getId() == schedules.get(i).getId()) {
+                adapter.notifyItemChanged(i, createdSchedule);
+                Log.d("Schedule", "Update schedule");
+                return;
+            }
+        }
+        schedules.add(0, createdSchedule); // add位置大丈夫か?
+        adapter.notifyItemInserted(0);
+        Log.d("Schedule", "Add Schedule");
+        return;
     }
 
     private void setupUi() {
@@ -101,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(itemDecoration);
     }
 
+    @Deprecated
     public void insertToRecyclerView(Schedule item) {
         if (schedules != null) {
             int index = schedules.indexOf(item);
@@ -108,21 +122,23 @@ public class MainActivity extends AppCompatActivity {
             if (index == -1) {
                 schedules.add(0, item); // add位置大丈夫か?
                 adapter.notifyItemInserted(0);
-                Log.d("Schedule","Add Schedule");
+                Log.d("Schedule", "Add Schedule");
             }
         }
     }
 
+    @Deprecated
     public void updateToRecyclerView(Schedule item) {
         if (schedules != null) {
             int index = schedules.indexOf(item);
             if (index != -1) {
                 adapter.notifyItemChanged(index, item);
-                Log.d("Schedule","Update schedule");
+                Log.d("Schedule", "Update schedule");
             }
         }
     }
 
+    @Deprecated
     public void deleteFromRecyclerView(Schedule item) {
         if (schedules != null) {
             int index = schedules.indexOf(item);
@@ -130,13 +146,13 @@ public class MainActivity extends AppCompatActivity {
                 boolean isDelete = schedules.remove(item);
                 if (isDelete) {
                     adapter.notifyItemRemoved(index);
-                    Log.d("Schedule","Remove Schedule");
+                    Log.d("Schedule", "Remove Schedule");
                 }
             }
         }
     }
 
-    public void saveSchedules(){
+    public void saveSchedules() {
         SharedPreferences data = getSharedPreferences(SCHEDULES_PREF, Context.MODE_PRIVATE);
         String convertedSchedules = SerializeUtil.toBase64(schedules);
         SharedPreferences.Editor editor = data.edit();

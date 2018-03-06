@@ -19,6 +19,10 @@ public class Schedule implements Serializable {
         id = UUID.randomUUID().toString();
     }
 
+    public String getId(){
+        return this.id;
+    }
+
     public String getTitle() {
         return this.title;
     }
